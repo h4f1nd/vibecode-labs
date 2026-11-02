@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DOTDAT // Clarion 2.x reader</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="app">
+    <header class="topbar">
+      <div class="brand">
+        <div class="logo">DOT<span>DAT</span></div>
+        <div class="tagline">clarion 2.x reader <span class="sep">//</span> read-only</div>
+      </div>
+      <div class="top-actions">
+        <label class="field encoding">
+          <span>encoding</span>
+          <select id="encoding">
+            <option value="cp437" selected>CP437 (DOS)</option>
+            <option value="cp850">CP850 (Latin-1 DOS)</option>
+            <option value="cp1252">Windows-1252</option>
+            <option value="latin-1">Latin-1</option>
+          </select>
+        </label>
+        <button id="open-btn" class="btn primary" type="button">Open .DAT</button>
+      </div>
+    </header>
+
+    <main>
+      <section id="empty" class="empty">
+        <div class="empty-box">
+          <div class="empty-glyph">▚</div>
+          <h1>No table open</h1>
+          <p>Choose a Clarion 2.x <code>.DAT</code> file to inspect its header, structure and records.</p>
+          <p class="muted">DOTDAT never writes to the source file. Export to a different folder.</p>
+          <button id="open-btn-2" class="btn primary" type="button">Open .DAT</button>
+        </div>
+      </section>
+
+      <section id="workspace" class="hidden">
+        <div class="file-strip">
+          <div>
+            <div id="file-name" class="file-name">—</div>
+            <div id="file-meta" class="muted">—</div>
+          </div>
+          <div class="file-badges">
+            <span class="badge">read-only</span>
+            <span class="badge" id="encoding-badge">cp437</span>
+          </div>
+        </div>
+
+        <nav class="tabs">
+          <button data-tab="overview" class="tab active" type="button">Overview</button>
+          <button data-tab="structure" class="tab" type="button">Structure</button>
+          <button data-tab="data" class="tab" type="button">Data</button>
+        </nav>
+
+        <div id="tab-overview" class="tab-panel">
+          <div class="cards" id="cards"></div>
+          <div class="section-title">Header</div>
+          <div class="table-wrap">
+            <table class="kv" id="overview-table"></table>
+          </div>
+        </div>
+
+        <div id="tab-structure" class="tab-panel hidden">
+          <div class="section-title">Fields</div>
+          <div class="table-wrap">
+            <table class="grid" id="structure-table">
+              <thead>
+                <tr>
+                  <th class="num">#</th>
+                  <th>name</th>
+                  <th>type</th>
+                  <th class="num">offset</th>
+                  <th class="num">length</th>
+                  <th class="num">format</th>
+                  <th class="num">dec</th>
+                  <th class="num">array</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+          <div class="section-title">Keys</div>
+          <div class="table-wrap">
+            <table class="grid" id="keys-table">
+              <thead>
+                <tr>
+                  <th class="num">#</th>
+                  <th>name</th>
+                  <th class="num">parts</th>
+                  <th class="num">type</th>
+                  <th>key fields</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+
+        <div id="tab-data" class="tab-panel hidden">
+          <div class="toolbar">
+            <input id="filter" class="filter" type="text"
+                   placeholder="filter: YEAR=2026 ; NAME~sample ; BALANCE>=1000">
+            <label class="check" title="Include records with the deleted bit set">
+              <input type="checkbox" id="include-deleted"> deleted
+            </label>
+            <label class="check" title="Show Clarion date fields as dates; exports keep the raw numbers">
+              <input type="checkbox" id="show-dates" checked> dates
+            </label>
+            <select id="page-size" title="Rows per page">
+              <option value="50">50 rows</option>
+              <option value="100" selected>100 rows</option>
+              <option value="500">500 rows</option>
+              <option value="1000">1000 rows</option>
+            </select>
+            <select id="export-format" title="Export format">
+              <option value="csv">CSV</option>
+              <option value="txt">TXT</option>
+              <option value="json">JSON</option>
+              <option value="jsonl">JSONL</option>
+              <option value="html">HTML</option>
+              <option value="xml">XML</option>
+              <option value="sql">SQL</option>
+              <option value="xlsx">Excel</option>
+            </select>
+            <button id="export-btn" class="btn" type="button">Export</button>
+            <button id="cancel-btn" class="btn danger hidden" type="button">Cancel</button>
+          </div>
+          <div class="table-wrap data-wrap">
+            <table class="grid data-grid" id="data-table">
+              <thead></thead>
+              <tbody></tbody>
+            </table>
+          </div>
+          <div class="pager">
+            <button id="prev" class="btn" type="button">‹ prev</button>
+            <span id="page-info" class="muted"></span>
+            <button id="next" class="btn" type="button">next ›</button>
+            <label class="jump">go to record
+              <input id="jump" type="number" min="1" step="1">
+              <button id="jump-btn" class="btn" type="button">go</button>
+            </label>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="statusbar">
+      <span id="status">starting…</span>
+      <span class="status-right">
+        <span class="badge" id="record-badge">0 rows</span>
+        <span class="badge" id="version-badge">v0.1.0</span>
+      </span>
+    </footer>
+  </div>
+
+  <div id="toast" class="toast hidden" role="status"></div>
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,49 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.hypothesis/
+.coverage
+htmlcov/
+
+# Build output
+build/nuitka/
+build/wheel/
+dist/
+*.whl
+*.build/
+*.dist/
+Output/
+nuitka-crash-report.xml
+
+# Local data and exports: never commit private tables or generated files
+*.DAT
+*.dat
+*.DBF
+*.dbf
+*.K01
+*.k01
+*.MEM
+*.mem
+*.csv
+*.xlsx
+*.sql
+*.jsonl
+
+# Scratch output
+out/
+output/
+benchmarks/tmp/
+*.log
+
+# OS and editors
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/

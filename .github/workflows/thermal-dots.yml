@@ -1,0 +1,57 @@
+name: thermal-dots
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "thermal-dots/**"
+      - ".github/workflows/thermal-dots.yml"
+  pull_request:
+    paths:
+      - "thermal-dots/**"
+      - ".github/workflows/thermal-dots.yml"
+  workflow_dispatch:
+
+concurrency:
+  group: thermal-dots-${{ github.ref }}
+  cancel-in-progress: true
+
+defaults:
+  run:
+    working-directory: thermal-dots
+
+jobs:
+  test:
+    name: Python ${{ matrix.python-version }}
+    runs-on: windows-latest
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.11", "3.14"]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
+
+      - name: Create virtualenv
+        run: uv venv --python ${{ matrix.python-version }} .venv
+
+      - name: Install package with dev and GUI extras
+        run: uv pip install --python .venv\Scripts\python.exe -e ".[dev,gui]"
+
+      - name: Tests
+        run: .venv\Scripts\python -m pytest
+
+      - name: Lint
+        run: .venv\Scripts\ruff check src tests benchmarks
+
+      - name: Type check
+        run: .venv\Scripts\mypy src
+
+      - name: Check JavaScript syntax
+        run: node --check src\thermaldots\ui\web\app.js

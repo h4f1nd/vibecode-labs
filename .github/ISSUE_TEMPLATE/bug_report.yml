@@ -1,0 +1,78 @@
+name: Bug report
+description: Something converted wrongly, crashed, or failed to start.
+title: "[bug] "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for the report. The exact command and the environment usually make
+        the difference between a guess and a fix.
+
+        Do **not** attach private photos or database tables. For DOTDAT, report
+        file names, counts and structural numbers, never customer data. For
+        thermal-dots, a synthetic image that shows the problem is enough.
+
+  - type: dropdown
+    id: project
+    attributes:
+      label: Project
+      options:
+        - thermal-dots
+        - dotdat
+    validations:
+      required: true
+
+  - type: input
+    id: version
+    attributes:
+      label: Version
+      description: "`tdots --version` or `dotdat --version`, and whether you used the source tree or a release archive."
+      placeholder: "thermal-dots 1.0.0, release archive"
+    validations:
+      required: true
+
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened
+      description: The actual result, including the full error message.
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: What you expected
+      description: What should have happened instead.
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: Exact commands or GUI actions, in order.
+      placeholder: |
+        1. tdots convert photo.jpg --preset newsprint
+        2. Open the PNG
+        3. The right edge has a white seam
+    validations:
+      required: true
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: Windows version, Python version, and `tdots doctor` or `dotdat doctor` output when relevant.
+      render: text
+    validations:
+      required: true
+
+  - type: textarea
+    id: extra
+    attributes:
+      label: Anything else
+      description: For thermal-dots, attach the exported file and its `.json` sidecar. For DOTDAT, attach no source table.
+    validations:
+      required: false

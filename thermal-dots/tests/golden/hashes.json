@@ -1,0 +1,19 @@
+{
+  "58mm/bayer4": "97c74eaf77f0fa46:384x288",
+  "58mm/bayer8": "befbae08fe9ad577:384x288",
+  "58mm/atkinson": "c5fde8cb89090b19:384x288",
+  "58mm/fs": "4fb905ba7ca44ded:384x288",
+  "58mm/halftone": "1ece6b9aa6591bcb:384x288",
+  "58mm/mean": "26627317ed2029b9:384x288",
+  "58mm/none": "99b1498edfb4cb7d:384x288",
+  "80mm/bayer4": "cd4fbf5473f92a0d:576x432",
+  "80mm/bayer8": "9e9768b19d03811d:576x432",
+  "80mm/atkinson": "0b1e6486b008196a:576x432",
+  "80mm/fs": "b3cba9f42ab88b1d:576x432",
+  "80mm/halftone": "d24d9d3e9c807562:576x432",
+  "80mm/mean": "1155fe66385194d1:576x432",
+  "80mm/none": "576ffa26567f98e0:576x432",
+  "58mm/tone": "1c1089c5ab42b3d6:384x288",
+  "58mm/invert": "3762c6c6522b7e09:384x288",
+  "58mm/margin-border": "a795bf24874ab4c4:384x134"
+}

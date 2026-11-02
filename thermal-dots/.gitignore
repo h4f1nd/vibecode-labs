@@ -1,0 +1,30 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+dist/
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.hypothesis/
+.coverage
+htmlcov/
+
+# Nuitka / packaging
+# NOTE: the project's own build/ folder holds build.ps1 and installer.iss,
+# so only Nuitka's output directories are ignored here.
+*.build/
+*.dist/
+build/nuitka/
+nuitka-crash-report.xml
+Output/
+
+# Local artefacts
+out/
+output/
+*.bin
+*.log
+benchmarks/tmp/

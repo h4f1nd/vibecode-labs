@@ -1,0 +1,27 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+build/nuitka/
+build/wheel/
+dist/
+*.whl
+.mypy_cache/
+.pytest_cache/
+.ruff_cache/
+
+# Local exports and scratch files
+*.csv
+*.json
+*.xlsx
+*.sql
+*.html
+!src/dotdat/ui/web/index.html
+*.xml
+!tests/golden/*.json
+!docs/**/*.json
+
+# OS
+Thumbs.db
+desktop.ini

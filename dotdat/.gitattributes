@@ -1,0 +1,13 @@
+* text=auto
+*.py text eol=lf
+*.js text eol=lf
+*.css text eol=lf
+*.html text eol=lf
+*.md text eol=lf
+*.ps1 text eol=crlf
+*.bat text eol=crlf
+*.dat binary
+*.DAT binary
+*.dbf binary
+*.DBF binary
+*.xlsx binary

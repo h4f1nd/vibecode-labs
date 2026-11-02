@@ -1,0 +1,18 @@
+# Normalise line endings: LF in the repository, whatever the OS wants on checkout.
+* text=auto eol=lf
+
+*.ps1 text eol=crlf
+*.bat text eol=crlf
+*.cmd text eol=crlf
+
+*.png binary
+*.bmp binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.webp binary
+*.ico binary
+*.bin binary
+
+# Keep diffs readable in review.
+*.md diff=markdown

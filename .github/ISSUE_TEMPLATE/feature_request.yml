@@ -1,0 +1,54 @@
+name: Feature request
+description: Suggest an improvement, an option, or a docs fix.
+title: "[feat] "
+labels: ["enhancement"]
+body:
+  - type: dropdown
+    id: project
+    attributes:
+      label: Project
+      options:
+        - thermal-dots
+        - dotdat
+    validations:
+      required: true
+
+  - type: markdown
+    attributes:
+      value: |
+        The scope rules are deliberate. thermal-dots converts images and never
+        prints; requests for printing, Bluetooth, serial or network transport
+        are out of scope. DOTDAT is read-only; requests that write to a source
+        `.DAT` file are out of scope.
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: The problem
+      description: What are you trying to do that the app cannot do today?
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed solution
+      description: A flag, a preset, a view, a docs change — whatever you have in mind.
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives you tried
+      description: Existing flags, presets or workflows that almost work.
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: scope
+    attributes:
+      label: Scope check
+      options:
+        - label: This request keeps thermal-dots conversion-only or DOTDAT read-only, as appropriate.
+          required: true

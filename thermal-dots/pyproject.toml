@@ -1,0 +1,95 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "thermal-dots"
+version = "1.0.0"
+description = "Convert images to 1-bit dot-matrix output for 58mm/80mm ESC/POS thermal printers"
+readme = "README.md"
+requires-python = ">=3.11"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [{ name = "thermal-dots" }]
+keywords = ["thermal-printer", "escpos", "dithering", "halftone", "dot-matrix"]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.14",
+  "Environment :: Win32 (MS Windows)",
+  "Topic :: Multimedia :: Graphics :: Graphics Conversion",
+  "Topic :: Printing",
+]
+
+dependencies = [
+  "pillow>=10.0",
+  "numpy>=1.26",
+  "typer>=0.12",
+  "rich>=13.0",
+]
+
+[project.optional-dependencies]
+gui = ["pywebview>=5.0"]
+heif = ["pillow-heif>=0.16"]
+dev = [
+  "pytest>=8.0",
+  "hypothesis>=6.100",
+  "ruff>=0.6",
+  "mypy>=1.11",
+]
+
+[project.scripts]
+tdots = "thermaldots.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/h4f1nd/vibecode-labs/tree/main/thermal-dots"
+Repository = "https://github.com/h4f1nd/vibecode-labs"
+Issues = "https://github.com/h4f1nd/vibecode-labs/issues"
+Releases = "https://github.com/h4f1nd/vibecode-labs/releases"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/thermaldots"]
+
+[tool.hatch.build.targets.sdist]
+include = [
+  "src",
+  "tests",
+  "benchmarks",
+  "build",
+  "docs",
+  "README.md",
+  "AGENTS.md",
+  "CHANGELOG.md",
+  "CLAUDE.md",
+  "CONTRIBUTING.md",
+  "LICENSE",
+  "pyproject.toml",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM", "RUF"]
+ignore = ["E501"]
+
+[tool.ruff.lint.per-file-ignores]
+# Typer's option/argument declarations *are* the function defaults by design.
+"src/thermaldots/cli.py" = ["B008"]
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+warn_unused_ignores = true
+files = ["src/thermaldots"]
+
+[[tool.mypy.overrides]]
+module = ["webview.*", "typer.*"]
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "--strict-markers"
+filterwarnings = ["error::PIL.Image.DecompressionBombWarning"]
