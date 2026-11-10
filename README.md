@@ -5,7 +5,7 @@ plain Python, honest documentation, no telemetry and no network calls.
 
 | Project | Version | What it does |
 |---|---|---|
-| [thermal-dots](thermal-dots/README.md) | 1.0.0 | Converts an image into the exact 1-bit dots a 58 mm or 80 mm ESC/POS thermal printer prints. |
+| [thermal-dots](thermal-dots/README.md) | 1.0.0 | Converts images into exportable 1-bit graphics for 58 mm or 80 mm thermal printers; printing is not supported. |
 | [dotdat](dotdat/README.md) | 0.1.0 | Opens legacy Clarion 2.x `.DAT` tables read-only, shows their structure and rows, and exports them. |
 
 Both are **Python 3.11+**, **MIT licensed**, and developed on Windows 11. Each
@@ -17,12 +17,14 @@ templates.
 
 ## thermal-dots
 
-Images → dots. It writes PNG, BMP, raw ESC/POS or text art at 384 dots (58 mm)
-or 576 dots (80 mm), with seven dither modes and a desktop preview that is
-rendered from the exported bitmap.
+Images → export files. It converts images into 1-bit dot graphics and exports
+them as PNG, BMP, raw ESC/POS data or text art. Output is 384 dots wide for
+58 mm printers or 576 dots wide for 80 mm printers. It includes seven dithering
+modes and a desktop preview rendered from the exported bitmap.
 
-**It does not print.** No USB, serial, Bluetooth, network or driver code exists
-in the project; your existing print app sends the file to the printer.
+**Printing is not implemented.** The app does not connect to a printer or send
+print jobs. Raw ESC/POS is an exported file, not a print operation. To print,
+open an exported file with separate printer software.
 
 ```powershell
 git clone https://github.com/h4f1nd/vibecode-labs.git
